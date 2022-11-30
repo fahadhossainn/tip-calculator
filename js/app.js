@@ -7,6 +7,7 @@ const totalOutput = document.querySelector(".output__value-total");
 const billInput = document.querySelector(".form__input--bill");
 const personInput = document.querySelector(".form__input--person");
 const form = document.querySelector(".form");
+const tip = document.querySelector(".tip");
 let tipValue;
 
 btnCustom.addEventListener("click", (e) => {
@@ -14,25 +15,19 @@ btnCustom.addEventListener("click", (e) => {
 });
 btnReset.addEventListener("click", (e) => {
   (tipOutput.textContent = "$0.0"), (totalOutput.textContent = "$0.0");
-  (billInput.value = ""), (personInput.value = ""), (tipCustom.value = "");
+  (billInput.value = ""),
+    (personInput.value = ""),
+    (tipCustom.value = ""),
+    (tip.textContent = "");
 });
 
-form.addEventListener("click", (e) => {
-  const tip = e.target.closest(".form__tip--button");
-  if (!tip) return;
-  tipValue = tip.value;
-});
-
-personInput.addEventListener("keyup", (e) => {
-  const customTip = document.querySelector(".form__input--custom").value;
-  const currentTip = parseFloat(customTip ? customTip : tipValue)
-    ? parseFloat(customTip ? customTip : tipValue)
-    : 0;
+const showResult = () => {
+  const currentTip = tip.textContent ? parseInt(tip.textContent) : 0;
   const currentBill = parseInt(billInput.value);
-  const totalPerson = parseInt(e.target.value);
+  const totalPerson = parseInt(personInput.value);
   let tipPerPerson, totalPerPerson, totalTip, totalBill;
 
-  if (!currentBill || !totalPerson) return;
+  if (!totalPerson || !currentBill) return;
   totalTip = (currentTip / 100) * currentBill;
   totalBill = currentBill + totalTip;
   tipPerPerson = (totalTip / totalPerson).toFixed(2);
@@ -43,4 +38,21 @@ personInput.addEventListener("keyup", (e) => {
       : Math.trunc(totalPerPerson) + 1;
   tipOutput.textContent = "$" + tipPerPerson;
   totalOutput.textContent = "$" + totalPerPerson;
+};
+
+form.addEventListener("click", (e) => {
+  const target = e.target.closest(".form__tip--button");
+  if (!target) return;
+  tip.textContent = target.value;
+  showResult();
+});
+inputCustom.addEventListener("keyup", (e) => {
+  tip.textContent = e.target.value;
+  showResult();
+});
+personInput.addEventListener("keyup", (e) => {
+  showResult();
+});
+billInput.addEventListener("keyup", (e) => {
+  showResult();
 });
