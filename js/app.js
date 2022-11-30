@@ -43,6 +43,4 @@ personInput.addEventListener("keyup", (e) => {
       : Math.trunc(totalPerPerson) + 1;
   tipOutput.textContent = "$" + tipPerPerson;
   totalOutput.textContent = "$" + totalPerPerson;
-
-  personInput.value = "";
 });
