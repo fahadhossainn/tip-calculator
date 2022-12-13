@@ -8,23 +8,23 @@ const billInput = document.querySelector(".form__input--bill");
 const personInput = document.querySelector(".form__input--person");
 const form = document.querySelector(".form");
 const tip = document.querySelector(".tip");
-let tipValue;
+const person = document.querySelector(".person");
 
-btnCustom.addEventListener("click", (e) => {
-  inputCustom.classList.toggle("hidden");
-});
-btnReset.addEventListener("click", (e) => {
+// let tipValue;
+
+const reset = () => {
   (tipOutput.textContent = "$0.0"), (totalOutput.textContent = "$0.0");
   (billInput.value = ""),
     (personInput.value = ""),
     (tipCustom.value = ""),
-    (tip.textContent = "");
-});
+    (person.textContent = "0"),
+    (tip.textContent = "0");
+};
 
 const showResult = () => {
-  const currentTip = tip.textContent ? parseInt(tip.textContent) : 0;
+  const currentTip = parseInt(tip.textContent ? tip.textContent : "0");
   const currentBill = parseInt(billInput.value);
-  const totalPerson = parseInt(personInput.value);
+  const totalPerson = parseInt(person.textContent);
   let tipPerPerson, totalPerPerson, totalTip, totalBill;
 
   if (!totalPerson || !currentBill) return;
@@ -46,11 +46,22 @@ form.addEventListener("click", (e) => {
   tip.textContent = target.value;
   showResult();
 });
+btnReset.addEventListener("click", reset);
+btnCustom.addEventListener("click", (e) => {
+  showResult();
+  inputCustom.classList.toggle("hidden");
+});
+
 inputCustom.addEventListener("keyup", (e) => {
   tip.textContent = e.target.value;
   showResult();
 });
 personInput.addEventListener("keyup", (e) => {
+  if (person.textContent === "0" || !e.target.value) {
+    tipOutput.textContent = " $0.0";
+    totalOutput.textContent = " $0.0";
+  }
+  person.textContent = e.target.value ? e.target.value : "0";
   showResult();
 });
 billInput.addEventListener("keyup", (e) => {

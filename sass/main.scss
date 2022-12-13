@@ -33,32 +33,38 @@ body {
 }
 .container {
   background-color: $color-white;
-  width: 50%;
+  width: 60%;
   margin: 5% auto;
   display: flex;
+  @media (min-width: 1200px) {
+    width: 50%;
+  }
   @media (max-width: 900px) {
     width: 70%;
   }
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 60%;
+    width: 75%;
   }
   &__left {
     width: 50%;
-    @media (max-width: 600px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media (max-width: 768px) {
       width: 90%;
     }
   }
   &__right {
-    width: 40%;
     background-color: $color-primary;
     padding: 3rem 2rem;
     margin: 3rem auto;
-    border-radius: 0.5rem;
-    @media (max-width: 600px) {
-      width: 90%;
+    flex: 1;
+    border-radius: 0.2rem;
+    @media (max-width: 768px) {
+      width: 80%;
     }
   }
 }
@@ -125,7 +131,7 @@ body {
       grid-gap: 1.5rem;
     }
     &--item {
-      height: 3.2rem;
+      height: 3.8rem;
 
       &:nth-child(3) > * {
         background-color: $color-primary;
@@ -217,4 +223,10 @@ body {
   &:active {
     transform: translate(-0.3rem, 0.1rem);
   }
+}
+
+.tip,
+.person {
+  font-size: 1.2rem;
+  font-weight: 700;
 }
