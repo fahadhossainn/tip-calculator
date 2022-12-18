@@ -94,13 +94,13 @@ body {
     &--person {
       background-image: url(../images/icon-person.svg);
       background-repeat: no-repeat;
-      background-size: 4%;
+      background-size: 3%;
       background-position: 1rem;
     }
     &--bill {
       background-image: url(../images/icon-dollar.svg);
       background-repeat: no-repeat;
-      background-size: 4%;
+      background-size: 3%;
       background-position: 1rem;
     }
     &--custom {
@@ -201,9 +201,6 @@ body {
     font-size: 3rem;
     font-weight: 700;
     color: $color-dark-cyan;
-    @media (max-width: 768px) {
-      font-size: 2.3rem;
-    }
   }
 }
 
@@ -229,4 +226,14 @@ body {
 .person {
   font-size: 1.2rem;
   font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .output__value {
+    font-size: 2.3rem;
+  }
+  .form__input--bill,
+  .form__input--person {
+    background-size: 2.5%;
+  }
 }
